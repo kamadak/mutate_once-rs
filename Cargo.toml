@@ -1,0 +1,7 @@
+[package]
+name = "mutate_once"
+version = "0.1.0"
+authors = ["KAMADA Ken'ichi <kamada@nanohz.org>"]
+edition = "2018"
+
+[dependencies]
