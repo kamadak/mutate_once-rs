@@ -4,4 +4,11 @@ version = "0.1.0"
 authors = ["KAMADA Ken'ichi <kamada@nanohz.org>"]
 edition = "2018"
 
-[dependencies]
+description = "Interior mutability, write-once and borrowable as plain &T"
+documentation = "https://docs.rs/mutate_once"
+homepage = "https://github.com/kamadak/mutate_once-rs"
+repository = "https://github.com/kamadak/mutate_once-rs"
+readme = "README"
+keywords = ["cell", "mutability", "write-once"]
+categories = ["caching", "memory-management", "rust-patterns"]
+license = "BSD-2-Clause"
