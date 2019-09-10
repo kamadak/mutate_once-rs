@@ -189,18 +189,21 @@ pub struct RefMut<'a, T> {
 impl<'a, T> Deref for RefMut<'a, T> {
     type Target = T;
 
+    #[inline]
     fn deref(&self) -> &Self::Target {
         unsafe { &*self.target.value.get() }
     }
 }
 
 impl<'a, T> DerefMut for RefMut<'a, T> {
+    #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         unsafe { &mut *self.target.value.get() }
     }
 }
 
 impl<'a, T> Drop for RefMut<'a, T> {
+    #[inline]
     fn drop(&mut self) {
         debug_assert_eq!(self.target.state.get(), State::Updating);
         self.target.state.replace(State::Unborrowed);
