@@ -180,6 +180,13 @@ impl<T> MutOnce<T> {
     }
 }
 
+impl<T: Default> Default for MutOnce<T> {
+    #[inline]
+    fn default() -> MutOnce<T> {
+        MutOnce::new(T::default())
+    }
+}
+
 /// A wrapper type for a mutably borrowed value from a `MutOnce<T>`.
 #[derive(Debug)]
 pub struct RefMut<'a, T> {
@@ -282,5 +289,12 @@ mod tests {
         let mut mutvec2 = mo.get_mut();
         mutvec1.push(1);
         mutvec2.push(2);
+    }
+
+    #[test]
+    fn default() {
+        let mo = MutOnce::<u32>::default();
+        *mo.get_mut() += 9;
+        assert_eq!(*mo.get_ref(), 9);
     }
 }
