@@ -178,6 +178,12 @@ impl<T> MutOnce<T> {
     pub fn is_fixed(&self) -> bool {
         self.state.get() == State::Fixed
     }
+
+    /// Consumes the `MutOnce`, returning the wrapped value.
+    #[inline]
+    pub fn into_inner(self) -> T {
+        self.value.into_inner()
+    }
 }
 
 impl<T: Default> Default for MutOnce<T> {
@@ -296,6 +302,14 @@ mod tests {
         let mut mutvec2 = mo.get_mut();
         mutvec1.push(1);
         mutvec2.push(2);
+    }
+
+    #[test]
+    fn into_inner() {
+        let mo = MutOnce::new(Vec::new());
+        mo.get_mut().push(1);
+        mo.get_mut().push(7);
+        assert_eq!(mo.into_inner(), vec![1, 7])
     }
 
     #[test]
