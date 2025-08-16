@@ -128,7 +128,7 @@ impl<T> MutOnce<T> {
     /// *mo.get_mut() += 7;     // Panics because `get_ref` is called once.
     /// ```
     #[inline]
-    pub fn get_mut(&self) -> RefMut<T> {
+    pub fn get_mut(&self) -> RefMut<'_, T> {
         match self.state.get() {
             State::Unborrowed => {
                 self.state.replace(State::Updating);
